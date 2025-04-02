@@ -8,13 +8,6 @@ import random
 from tools.wx_publisher import WeixinPublisher
 from utils import utils
 
-
-# 导入 & 配置OpenAI API key 和 base URL
-openai_api_key = os.getenv("OPENROUTER_API_KEY")
-model = os.getenv("MODEL")
-openai_api_base = os.getenv("OPENAI_API_BASE")
-
-
 class ReadTemplateToolInput(BaseModel):
     audit_file: str = Field(description="审核修改后的文章")
 
