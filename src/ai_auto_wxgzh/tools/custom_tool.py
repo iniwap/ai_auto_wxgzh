@@ -8,6 +8,7 @@ import random
 from tools.wx_publisher import WeixinPublisher
 from utils import utils
 
+
 class ReadTemplateToolInput(BaseModel):
     audit_file: str = Field(description="审核修改后的文章")
 
