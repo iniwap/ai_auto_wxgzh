@@ -87,8 +87,8 @@ class PublisherTool(BaseTool):
                 img_api_key,
                 img_api_model,
             )
-        except Exception as e:  # noqa 841
-            pass
+        except Exception as e:
+            print(str(e))
 
         # 保存为 final_article.html
         with open("final_article.html", "w", encoding="utf-8") as file:
