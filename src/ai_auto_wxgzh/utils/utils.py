@@ -92,16 +92,19 @@ def get_latest_file_os(dir_path):
 
 
 def extract_image_urls(html_content):
-    """
-    从 HTML 内容中提取图片链接。
-
-    Args:
-        html_content (str): HTML 内容。
-
-    Returns:
-        list: 图片链接列表。
-    """
-    return re.findall(r"url\(\'(https://picsum\.photos/.*?)\'\)", html_content)
+    patterns = [
+        r'<img[^>]*?src=["\'](.*?)["\']',  # 匹配 src
+        r'<img[^>]*?srcset=["\'](.*?)["\']',  # 匹配 srcset
+        r'<img[^>]*?data-(?:src|image)=["\'](.*?)["\']',  # 匹配 data-src/data-image
+        r'background(?:-image)?\s*:\s*url$["\']?(.*?)["\']?$',  # 匹配 background
+    ]
+    urls = []
+    for pattern in patterns:
+        matches = re.findall(pattern, html_content, re.IGNORECASE)
+        urls.extend(
+            [url for match in matches for url in (match.split(",") if "," in match else [match])]
+        )
+    return list(set(urls))
 
 
 def download_and_save_image(image_url, local_image_folder):
