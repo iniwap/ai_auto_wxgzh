@@ -41,12 +41,14 @@ def extract_html(html, max_length=64):
     digest = None
 
     soup = BeautifulSoup(html, "html.parser")
+    title_tag = soup.find("title")
     h1_tag = soup.find("h1")
-    if h1_tag:
-        # 提取<h1>标签内的所有文本内容，并去除多余的空格和换行符
-        text = h1_tag.get_text(separator=" ", strip=True)
-        text = re.sub(r"\s+", " ", text).strip()
-        title = text
+
+    # 标题优先级：<title> > <h1>
+    if title_tag:
+        title = " ".join(title_tag.get_text(strip=True).split())
+    elif h1_tag:
+        title = " ".join(h1_tag.get_text(strip=True).split())
 
     # 摘要
     # 提取所有文本内容，并去除多余的空格和换行符
