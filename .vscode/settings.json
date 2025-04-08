@@ -1,12 +1,5 @@
 {
     "workbench.colorTheme": "Atom One Dark",
-    "plantuml.jarArgs": [
-        "-DPLANTUML_LIMIT_SIZE=8192"
-    ],
-    "plantuml.commandArgs": [],
-    "plantuml.diagramsRoot": "docs/diagrams/src",
-    "plantuml.exportOutDir": "docs/diagrams/out",
-    "python.experiments.optOutFrom": [],
     "flake8.args": ["--max-line-length=100"],
     "editor.formatOnSave": true,
     "black-formatter.args": ["--line-length","100"],
