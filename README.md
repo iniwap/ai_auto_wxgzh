@@ -38,7 +38,7 @@ python .\src\ai_auto_wxgzh\main.py
 这个很必要，因为生成的模板都使用了，浏览器显示正常，但是发布到微信公众号，就变成了垂直排列，无法作为背景。整体效果差太多了。~~
 ### 经过几天的研究，发现以下问题：
 - **发布文章后，微信会自动移除position: relative 和 position: absolute等 ，必须通过其他方式实现**
-- 微信公众号支持animateMotion，不支持animate
+- 微信公众号支持animateMotion，不支持animate（经测试只支持透明度变化动画）
 - 调整好了template7，效果虽然不能和原来的相比，但是总体还不错（有背景装饰、有动画）
 
 
