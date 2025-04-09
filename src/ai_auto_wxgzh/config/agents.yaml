@@ -63,7 +63,7 @@ designer:
       - 模块化：使用<section>标签包裹不同内容模块
       - 简单交互：用HTML原生属性实现微动效
       - 图片处理：非必要不使用配图，若必须配图且又找不到有效图片链接时，使用https://picsum.photos/[宽度]/[高度]?random=1随机一张
-      - SVG：生成炫酷SVG动画，目的是方便理解或给用户小惊喜
+      - SVG：生成炫酷SVG动画，目的是方便理解或给用户小惊喜（必须使用animateMotion，不支持animate）
       - 只基于核心主题内容生成，不包含作者，版权，相关URL等信息
 
     ## 其他要求：
@@ -71,6 +71,7 @@ designer:
       - 输出长度：10屏以内 (移动端)
       - 生成的代码**必须**放在Markdown ``` 标签中
       - 主体内容必须是**中文**，但可以用部分英语装逼
+      - 避免使用position: absolute/relative（微信公众号不支持），会导致元素垂直排列，而不是作为背景元素
     <|eot_id|>"
   prompt_template: "<|start_header_id|>user<|end_header_id|>{{ .Prompt }}<|eot_id|>"
   response_template: "<|start_header_id|>assistant<|end_header_id|>{{ .Response }}<|eot_id|>"
