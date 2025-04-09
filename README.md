@@ -36,3 +36,4 @@ python .\src\ai_auto_wxgzh\main.py
 ## 其他说明
 由于不熟悉微信公众号开发，哪位知道如何正确的使用“position: absolute;”，麻烦提一个issue 或者PR给我。
 这个很必要，因为生成的模板都使用了，浏览器显示正常，但是发布到微信公众号，就变成了垂直排列，无法作为背景。整体效果差太多了。
+【发现了问题：实际显示的页面，会自动移除position: relative 和 position: absolute等 】，不知道如何阻止这种自动修改？
