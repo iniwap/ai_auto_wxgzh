@@ -39,6 +39,6 @@ python .\src\ai_auto_wxgzh\main.py
 ### 经过几天的研究，发现以下问题：
 - **发布文章后，微信会自动移除position: relative 和 position: absolute等 ，必须通过其他方式实现**
 - 微信公众号支持animateMotion，不支持animate（经测试只支持透明度变化动画）
-- 调整好了template7，效果虽然不能和原来的相比，但是总体还不错（有背景装饰、有动画）->**请查看发布后的效果：** https://mp.weixin.qq.com/s/NvN3ImwqUHGmD4OO-4rErg
+- 调整好了template7，效果虽然不能和原来的相比，但是总体还不错（有背景装饰、有动画）->**请查看发布后的效果：** https://mp.weixin.qq.com/s/ug7NseZDziDMWBVwe3s1pw
 
 
