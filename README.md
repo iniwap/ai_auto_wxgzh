@@ -39,6 +39,7 @@ python .\src\ai_auto_wxgzh\main.py
 经过反复的微调，已经完成的模板效果如下：
 - **template7**: https://mp.weixin.qq.com/s/ug7NseZDziDMWBVwe3s1pw
 - **template1**: https://mp.weixin.qq.com/s/9MoMFXgY7ieEMW0kqBqfvQ
+- **template2**: https://mp.weixin.qq.com/s/0vCNvgbHfilSS77wKzM6Dg
 
  
 ## 其他说明
