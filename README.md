@@ -36,6 +36,7 @@ python .\src\ai_auto_wxgzh\main.py
 
 
 ## 模板发布效果预览
+经过反复的微调，已经完成的模板效果如下：
 - **template7**: https://mp.weixin.qq.com/s/ug7NseZDziDMWBVwe3s1pw
 - **template1**: https://mp.weixin.qq.com/s/9MoMFXgY7ieEMW0kqBqfvQ
 
