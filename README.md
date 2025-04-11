@@ -37,10 +37,11 @@ python .\src\ai_auto_wxgzh\main.py
 
 ## 模板发布效果预览
 经过反复的微调，已经完成的模板效果如下：
-- **template7**: https://mp.weixin.qq.com/s/ug7NseZDziDMWBVwe3s1pw
 - **template1**: https://mp.weixin.qq.com/s/9MoMFXgY7ieEMW0kqBqfvQ
 - **template2**: https://mp.weixin.qq.com/s/0vCNvgbHfilSS77wKzM6Dg
-
+- **template3**: https://mp.weixin.qq.com/s/ygroULs7dx5Q54FkR8P0uA
+- **template7**: https://mp.weixin.qq.com/s/ug7NseZDziDMWBVwe3s1pw
+有兴趣的可以继续微调（如边距等），上面的模板可以比较好的显示在微信公众号上了。执行代码时，选择使用模板，生成的文章会自动选取填充上面的模板发布文章。
  
 ## 其他说明
 ~~由于不熟悉微信公众号开发，哪位知道如何正确的使用“position: absolute;”，麻烦提一个issue 或者PR给我。
