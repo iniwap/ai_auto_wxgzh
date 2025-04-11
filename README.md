@@ -44,6 +44,7 @@ python .\src\ai_auto_wxgzh\main.py
 - **template7**: https://mp.weixin.qq.com/s/ug7NseZDziDMWBVwe3s1pw
 
 有兴趣的可以继续微调（如边距等），上面的模板可以比较好的显示在微信公众号上了。执行代码时，选择使用模板，生成的文章会自动选取填充上面的模板发布文章。
+
 **调整这些模板花费了大量时间，麻烦关注下公众号**
  
 ## 其他说明
