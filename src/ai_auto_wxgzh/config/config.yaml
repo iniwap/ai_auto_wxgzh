@@ -53,7 +53,7 @@ api:
     model_index: 0
     key_index: 0
     api_key: ["sk-or-v1-x","sk-or-v1-X2"]
-    model: ["openrouter/deepseek/deepseek-chat:free","openrouter/qwen/qwq-32b:free","openrouter/google/gemini-2.0-flash-lite-preview-02-05:free"]
+    model: ["openrouter/deepseek/deepseek-chat-v3-0324:free","openrouter/deepseek/deepseek-r1:free","openrouter/deepseek/deepseek-chat:free","openrouter/qwen/qwq-32b:free","openrouter/google/gemini-2.0-flash-lite-preview-02-05:free","openrouter/google/gemini-2.0-flash-thinking-exp:free"]
     api_base: "https://openrouter.ai/api/v1"
   ollama:
       key: OPENAI_API_KEY
