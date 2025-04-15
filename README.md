@@ -51,7 +51,7 @@ pip  install crewai
 这应该跟其最近修改了付费策略有关系，免费的终究是没那么好用。
 
 ## 模板发布效果预览
-经过反复的微调，已经完成的模板效果如下：
+经过反复的微调，已经完成发布到微信公众号的模板效果如下：
 - **template1**: https://mp.weixin.qq.com/s/9MoMFXgY7ieEMW0kqBqfvQ
 - **template2**: https://mp.weixin.qq.com/s/0vCNvgbHfilSS77wKzM6Dg
 - **template3**: https://mp.weixin.qq.com/s/ygroULs7dx5Q54FkR8P0uA
