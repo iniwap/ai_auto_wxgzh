@@ -36,6 +36,19 @@ cd ai_auto_wxgzh
 python .\src\ai_auto_wxgzh\main.py
 ```
 
+## 问题定位
+如果遇到没有发布成功或者没有生成final_article的情况，又找不到问题，请临时更换下CrewAI版本
+```shell
+pip  uninstall crewai
+pip  install crewai==0.102.0
+```
+此版本会输出过程日志，仍看不出问题的，可将日志提交Issue
+
+恢复到最新版本
+```shell
+pip  uninstall crewai
+pip  install crewai
+```
 
 ## 模板发布效果预览
 经过反复的微调，已经完成的模板效果如下：
