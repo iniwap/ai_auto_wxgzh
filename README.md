@@ -47,7 +47,7 @@ pip  install crewai==0.102.0
 pip  uninstall crewai
 pip  install crewai
 ```
-⚠⚠⚠**注意：免费的openrouter有可能服务不正常，无法生成效果（这种情况只能等用的人少的时候，再试）；此外将config里的use_template改成false，提高成功率** ⚠⚠⚠
+⚠️⚠️⚠️: **注意：免费的openrouter有可能服务不正常，无法生成效果（这种情况只能等用的人少的时候，再试）；此外将config里的use_template改成false，提高成功率** ⚠️⚠️⚠️
 
 ## 模板发布效果预览
 经过反复的微调，已经完成的模板效果如下：
