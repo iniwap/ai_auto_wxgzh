@@ -43,6 +43,7 @@ pip  uninstall crewai
 pip  install crewai==0.102.0
 ```
 **此版本会输出过程日志，仍看不出问题的，可将日志提交Issue**
+
 恢复到最新版本：
 ```shell
 pip  uninstall crewai
