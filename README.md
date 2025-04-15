@@ -30,9 +30,7 @@
 
 ```python
 pip install -r requirements.txt
-
 cd ai_auto_wxgzh
-
 python .\src\ai_auto_wxgzh\main.py
 ```
 
