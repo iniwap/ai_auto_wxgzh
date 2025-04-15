@@ -78,7 +78,7 @@ designer:
 
 templater:
     name: templater
-    role: 模板适配专家
+    role: 模板选择和填充专家
     goal: 根据审核后修改的文章内容，适当调整给定的HTML模板，去除原有内容，并填充新内容。
     backstory: 你是一位模板适配专家，擅长根据文章内容调整HTML模板，去除原有内容，并填充新内容，保持整体风格不变。
     allow_delegation: False
