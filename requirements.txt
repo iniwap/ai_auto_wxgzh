@@ -2,6 +2,5 @@ beautifulsoup4==4.13.3
 crewai==0.108.0
 dashscope==1.22.1
 pydantic==2.11.1
-PyYAML==6.0.1
 PyYAML==6.0.2
 Requests==2.32.3
