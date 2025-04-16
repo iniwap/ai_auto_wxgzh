@@ -13,7 +13,7 @@ import mimetypes
 import json
 import time
 
-from utils import utils
+from src.autowx_gzh.utils import utils
 
 
 class PublishStatus(Enum):
@@ -73,7 +73,8 @@ class WeixinPublisher:
             expires_in = data.get("expires_in")
 
             if not access_token:
-                raise Exception(f"获取access_token失败: {data}")
+                print(f"获取access_token失败: {data}")
+                return None
 
             self.access_token_data = {
                 "access_token": access_token,
@@ -83,7 +84,8 @@ class WeixinPublisher:
             return access_token
         except requests.exceptions.RequestException as e:
             print(f"获取微信access_token失败: {e}")
-            raise
+
+        return None  # 获取不到就返回None，失败交给后面的流程处理
 
     def _upload_draft(self, article, title, digest, media_id):
         token = self._ensure_access_token()
@@ -100,7 +102,7 @@ class WeixinPublisher:
                 "only_fans_can_comment": 0,
             },
         ]
-
+        ret = None
         try:
             data = {"articles": articles}
 
@@ -111,45 +113,51 @@ class WeixinPublisher:
             data = response.json()
 
             if "errcode" in data and data.get("errcode") != 0:
-                raise Exception(f"上传草稿失败: {data.get('errmsg')}")
+                print(f"上传草稿失败: {data.get('errmsg')}")
             elif "media_id" not in data:
-                raise Exception("上传草稿失败: 响应中缺少 media_id")
-
-            return {
-                "media_id": data.get("media_id"),
-            }
+                print("上传草稿失败: 响应中缺少 media_id")
+            else:
+                ret = {
+                    "media_id": data.get("media_id"),
+                }
         except requests.exceptions.RequestException as e:
             print(f"上传微信草稿失败: {e}")
-            raise
+
+        return ret
 
     def _generate_img_by_ali(self, prompt, size="1024*1024"):
         image_dir = utils.get_current_dir("image")
-        rsp = ImageSynthesis.call(
-            api_key=self.img_api_key,
-            model=self.img_api_model,
-            prompt=prompt,
-            negative_prompt="低分辨率、错误、最差质量、低质量、残缺、多余的手指、比例不良",
-            n=1,
-            size=size,
-        )
-        if rsp.status_code == HTTPStatus.OK:
-            # 实际上只有一张图片，为了节约，不同时生成多张
-            for result in rsp.output.results:
-                file_name = PurePosixPath(unquote(urlparse(result.url).path)).parts[-1]
-                # 拼接绝对路径和文件名
-                file_path = os.path.join(image_dir, file_name)
-                with open(file_path, "wb+") as f:
-                    f.write(requests.get(result.url).content)
-            return rsp.output.results[0].url
-        else:
-            print(
-                "sync_call Failed, status_code: %s, code: %s, message: %s"
-                % (rsp.status_code, rsp.code, rsp.message)
+        img_url = None
+        try:
+            rsp = ImageSynthesis.call(
+                api_key=self.img_api_key,
+                model=self.img_api_model,
+                prompt=prompt,
+                negative_prompt="低分辨率、错误、最差质量、低质量、残缺、多余的手指、比例不良",
+                n=1,
+                size=size,
             )
-            return None
+            if rsp.status_code == HTTPStatus.OK:
+                # 实际上只有一张图片，为了节约，不同时生成多张
+                for result in rsp.output.results:
+                    file_name = PurePosixPath(unquote(urlparse(result.url).path)).parts[-1]
+                    # 拼接绝对路径和文件名
+                    file_path = os.path.join(image_dir, file_name)
+                    with open(file_path, "wb+") as f:
+                        f.write(requests.get(result.url).content)
+                img_url = rsp.output.results[0].url
+            else:
+                print(
+                    "sync_call Failed, status_code: %s, code: %s, message: %s"
+                    % (rsp.status_code, rsp.code, rsp.message)
+                )
+        except Exception as e:
+            print(f"_generate_img_by_ali调用失败: {e}")
+
+        return img_url
 
     def generate_img(self, prompt, size="1024*1024"):
-        img_url = ""
+        img_url = None
         if self.img_api_type == "ali":
             img_url = self._generate_img_by_ali(prompt, size)
         elif self.img_api_type == "picsum":
@@ -167,6 +175,7 @@ class WeixinPublisher:
             # 如果图片URL为空，则返回一个默认的图片ID
             return "SwCSRjrdGJNaWioRQUHzgF68BHFkSlb_f5xlTquvsOSA6Yy0ZRjFo0aW9eS3JJu_"
 
+        media_id = None
         try:
             if image_url.startswith(("http://", "https://")):
                 # 处理网络图片
@@ -183,7 +192,9 @@ class WeixinPublisher:
             else:
                 # 处理本地图片
                 if not os.path.exists(image_url):
-                    raise FileNotFoundError(f"本地图像文件未找到: {image_url}")
+                    print(f"本地图像文件未找到: {image_url}")
+                    return None
+
                 with open(image_url, "rb") as f:
                     image_buffer = BytesIO(f.read())
 
@@ -202,30 +213,34 @@ class WeixinPublisher:
             data = response.json()
 
             if "errcode" in data and data.get("errcode") != 0:
-                raise Exception(f"上传图片失败: {data.get('errmsg')}")
+                print(f"上传图片失败: {data.get('errmsg')}")
             elif "media_id" not in data:
-                raise Exception("上传图片失败: 响应中缺少 media_id")
-
-            return data.get("media_id"), data.get("url")
+                print("上传图片失败: 响应中缺少 media_id")
+            else:
+                media_id = data.get("media_id"), data.get("url")
 
         except requests.exceptions.RequestException as e:
             print(f"上传微信图片失败: {e}")
-            raise
+
+        return media_id
 
     def add_draft(self, article, title, digest, media_id):
+        ret = None
         try:
             # 上传草稿
             draft = self._upload_draft(article, title, digest, media_id)
-            return PublishResult(
-                publishId=draft["media_id"],
-                status=PublishStatus.DRAFT,
-                publishedAt=datetime.now(),
-                platform="weixin",
-                url=f"https://mp.weixin.qq.com/s/{draft['media_id']}",
-            )
+            if draft is not None:
+                ret = PublishResult(
+                    publishId=draft["media_id"],
+                    status=PublishStatus.DRAFT,
+                    publishedAt=datetime.now(),
+                    platform="weixin",
+                    url=f"https://mp.weixin.qq.com/s/{draft['media_id']}",
+                )
         except Exception as e:
-            print(f"微信发布失败: {e}")
-            raise
+            print(f"微信添加草稿失败: {e}")
+
+        return ret
 
     def publish(self, media_id: str):
         """
@@ -234,27 +249,32 @@ class WeixinPublisher:
         :param media_id: 要发布的草稿的media_id
         :return: 包含发布任务ID的字典
         """
+        ret = None
         url = f"{self.BASE_URL}/freepublish/submit"
         params = {"access_token": self._ensure_access_token()}
-
         data = {"media_id": media_id}
 
-        response = requests.post(url, params=params, json=data)
-        response.raise_for_status()
-        result = response.json()
+        try:
+            response = requests.post(url, params=params, json=data)
+            response.raise_for_status()
+            result = response.json()
 
-        if "errcode" in result and result.get("errcode") != 0:
-            raise Exception(f"草稿发布失败: {result.get('errmsg')}")
-        elif "publish_id" not in result:
-            raise Exception("草稿发布失败: 响应中缺少 publish_id")
+            if "errcode" in result and result.get("errcode") != 0:
+                print(f"草稿发布失败: {result.get('errmsg')}")
+            elif "publish_id" not in result:
+                print("草稿发布失败: 响应中缺少 publish_id")
+            else:
+                ret = PublishResult(
+                    publishId=result.get("publish_id"),
+                    status=PublishStatus.PUBLISHED,
+                    publishedAt=datetime.now(),
+                    platform="weixin",
+                    url="",  # 需要通过轮询获取
+                )
+        except Exception as e:
+            print(f"发布草稿文章失败：{e}")
 
-        return PublishResult(
-            publishId=result.get("publish_id"),
-            status=PublishStatus.PUBLISHED,
-            publishedAt=datetime.now(),
-            platform="weixin",
-            url="",  # 需要通过轮询获取
-        )
+        return ret
 
     # 轮询获取文章链接
     def poll_article_url(self, publish_id, max_retries=10, interval=2):
@@ -273,6 +293,7 @@ class WeixinPublisher:
     # ---------------------以下接口需要微信认证[个人用户不可用]-------------------------
     # 单独发布只能通过绑定到菜单的形式访问到，无法显示到公众号文章列表
     def create_menu(self, article_url):
+        ret = None
         menu_data = {
             "button": [
                 {
@@ -283,12 +304,20 @@ class WeixinPublisher:
             ]
         }
         menu_url = f"{self.BASE_URL}/menu/create?access_token={self._ensure_access_token()}"
-        result = requests.post(menu_url, json=menu_data).json()
-        if "errcode" in result and result.get("errcode") != 0:
-            raise Exception(f"创建菜单失败: {result.get('errmsg')}")
+        try:
+            result = requests.post(menu_url, json=menu_data).json()
+            if "errcode" in result and result.get("errcode") != 0:
+                print(f"创建菜单失败: {result.get('errmsg')}")
+            else:
+                ret = "创建菜单成功"
+        except Exception as e:
+            print(f"创建菜单失败，请确认公众号已经认证:{e}")
+
+        return ret
 
     # 上传图文消息素材【订阅号与服务号认证后均可用】
     def media_uploadnews(self, article, title, digest, media_id):
+        ret = None
         data = {
             "articles": [
                 {
@@ -304,16 +333,23 @@ class WeixinPublisher:
             ]
         }
         url = f"{self.BASE_URL}/media/uploadnews?access_token={self._ensure_access_token()}"
-        result = requests.post(url, json=data).json()
-        if "errcode" in result and result.get("errcode") != 0:
-            raise Exception(f"上次图文消息素材失败: {result.get('errmsg')}")
-        elif "media_id" not in result:
-            raise Exception("上次图文消息素材失败: 响应中缺少 media_id")
 
-        return result.get("media_id")
+        try:
+            result = requests.post(url, json=data).json()
+            if "errcode" in result and result.get("errcode") != 0:
+                print(f"上次图文消息素材失败: {result.get('errmsg')}")
+            elif "media_id" not in result:
+                print("上次图文消息素材失败: 响应中缺少 media_id")
+            else:
+                ret = result.get("media_id")
+        except Exception as e:
+            print(f"上传图文素材失败，请检查公众号是否已经认证：{e}")
+
+        return ret
 
     # 根据标签进行群发【订阅号与服务号认证后均可用】
     def message_mass_sendall(self, media_id):
+        ret = None
         data = {
             "filter": {
                 "is_to_all": True,
@@ -323,6 +359,14 @@ class WeixinPublisher:
             "send_ignore_reprint": 1,
         }
         url = f"{self.BASE_URL}/message/mass/sendall?access_token={self._ensure_access_token()}"
-        result = requests.post(url, json=data).json()
-        if "errcode" in result and result.get("errcode") != 0:
-            raise Exception(f"根据标签进行群发: {result.get('errmsg')}")
+
+        try:
+            result = requests.post(url, json=data).json()
+            if "errcode" in result and result.get("errcode") != 0:
+                print(f"根据标签进行群发: {result.get('errmsg')}")
+            else:
+                ret = "群发消息成功"
+        except Exception as e:
+            print(f"群发消息失败：{e}")
+
+        return ret
