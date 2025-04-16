@@ -73,3 +73,8 @@ pip  install crewai
 - 不支持button，会被自动移除
 - 会自动移除 background: url
 
+## 后续计划
+- 优化模板，降低token使用率
+- 优化处理，减少不必要的token消耗
+- 增加功能，使输出效果更好
+- 增加容错，提升成功率
