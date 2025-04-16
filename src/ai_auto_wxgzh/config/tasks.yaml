@@ -26,17 +26,17 @@ audit_content:
 design_content:
   name: "design_content"
   description: |
-    将审核后生成的文章转化为精美的微信公众号排版，提升阅读体验和视觉吸引力。
+    将生成的文章转化为精美的微信公众号排版，提升阅读体验和视觉吸引力。
     请严格遵循以下要求：  
-    - 仅对审核后的文章进行排版设计和风格优化，不得生成新的文章内容。  
-    - 不得过多删减原文章内容，保持原内容的完整性和核心信息。  
+    - 仅对文章进行排版设计和风格优化，不得生成新的文章内容。  
+    - 不得过多删减原文章内容，保持原内容的完整性和核心信息。
   agent: designer
   expected_output: 排版设计后的文章（HTML格式）
 
 template_content:
   name: "template_content"
   description: |
-    使用 read_template_tool 读取 HTML 模板,将读取的模板内容和前面审核任务生成的文章内容作为输入，
+    使用 read_template_tool 读取 HTML 模板,将读取的模板内容和前面任务生成的文章内容作为输入，
     适当调整模板，去除原有内容，并填充新内容，保持整体风格不变。
     生成一个包含填充后文章内容的全新 HTML 文件。
   agent: templater
