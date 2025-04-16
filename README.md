@@ -41,7 +41,7 @@ python .\src\ai_auto_wxgzh\main.py
 pip  uninstall crewai
 pip  install crewai==0.102.0
 ```
-**此版本会输出过程日志，仍看不出问题的，可将日志提交Issue**
+**此版本会输出过程日志，仍看不出问题的，可将日志提交Issue（只需要最后进入`文章发布专家`任务的日志部分，如果没到这部分，说明已经中断出错了）**
 
 恢复到最新版本：
 ```shell
