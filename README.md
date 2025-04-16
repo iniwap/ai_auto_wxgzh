@@ -23,7 +23,7 @@
 - img_api：生成图片模型，主要是用来做公众号封面图的
     - picsum: 由于生成图片消耗太大，这里提供一种随机图片方式，修改成这个`api_type`即可
 - use_template: 目前只有Claude 3.7有比较好的模板生成效果，由于无法直接使用（有API付费的当然），这里特别设计是否使用内置模板（每天可以免费到POE生成模板放到`knowledge/template`文件夹下）
-- need_auditor: 为了降低token消耗，提高发布成功率，可关闭“质量审核”agent/task
+- need_auditor: 为了降低token消耗，提高发布成功率，可关闭“质量审核”agent/task（默认关闭）
 
 ## 运行方式
 
