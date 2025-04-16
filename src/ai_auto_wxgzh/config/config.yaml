@@ -70,3 +70,4 @@ img_api:
     api_key: ""
     model: "" # 随机图片，不需要参数
 use_template: true
+need_auditor: false
