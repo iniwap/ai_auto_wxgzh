@@ -18,12 +18,12 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # interpolate any tasks and agents information
 
 
-def run(inputs, use_template=False):
+def run(inputs, use_template=False, need_auditor=False):
     """
     Run the crew.
     """
     try:
-        AutowxGzh(use_template).crew().kickoff(inputs=inputs)
+        AutowxGzh(use_template, need_auditor).crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
@@ -79,10 +79,11 @@ def load_config():
         config["api"],
         config["img_api"],
         config["use_template"],
+        config["need_auditor"],
     )
 
 
-def ai_auto_wxgzh(only_pub=False):
+def autowx_gzh(only_pub=False):
     def pub2wx(
         image_url,
         appid,
@@ -115,7 +116,7 @@ def ai_auto_wxgzh(only_pub=False):
         print(f"发布结果: {publish_result}")
 
     # 需要生成文章
-    credentials, platforms, api, img_api, use_template = load_config()
+    credentials, platforms, api, img_api, use_template, need_auditor = load_config()
 
     use_api = api[api["api_type"]]
     if api["api_type"] == "openrouter":  # OR每天限量，可以多个账号切换
@@ -168,8 +169,8 @@ def ai_auto_wxgzh(only_pub=False):
             )
             return
         else:
-            run(inputs, use_template)
+            run(inputs, use_template, need_auditor)
 
 
 if __name__ == "__main__":
-    ai_auto_wxgzh()
+    autowx_gzh()
