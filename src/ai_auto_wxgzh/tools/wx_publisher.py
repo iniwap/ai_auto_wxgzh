@@ -13,7 +13,7 @@ import mimetypes
 import json
 import time
 
-from src.autowx_gzh.utils import utils
+from utils import utils
 
 
 class PublishStatus(Enum):
