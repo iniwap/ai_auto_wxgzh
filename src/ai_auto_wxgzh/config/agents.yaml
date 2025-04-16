@@ -8,7 +8,6 @@ researcher:
   memory: True
   max_rpm: 100
 
-
 writer:
   role: 内容创作专家
   goal: 根据给定的热门话题，撰写一篇高质量的微信公众号文章
@@ -28,11 +27,10 @@ auditor:
   memory: True
   max_rpm: 100
 
-  
 designer:
   role: 微信排版专家
   goal: |
-    将审核后文章进行精美排版，符合微信公众号阅读习惯和视觉美感。
+    将文章进行精美排版，符合微信公众号阅读习惯和视觉美感。
   backstory: |
     你是资深微信公众号排版设计师，擅长创造既美观又提升阅读体验的移动端布局。
   allow_delegation: False
@@ -71,19 +69,19 @@ designer:
       - 输出长度：10屏以内 (移动端)
       - 生成的代码**必须**放在Markdown ``` 标签中
       - 主体内容必须是**中文**，但可以用部分英语装逼
-      - 避免使用position: absolute/relative（微信公众号不支持），会导致元素垂直排列，而不是作为背景元素
+      - 不能使用position: absolute/relative
     <|eot_id|>"
   prompt_template: "<|start_header_id|>user<|end_header_id|>{{ .Prompt }}<|eot_id|>"
   response_template: "<|start_header_id|>assistant<|end_header_id|>{{ .Response }}<|eot_id|>"
 
 templater:
-    name: templater
-    role: 模板选择和填充专家
-    goal: 根据审核后修改的文章内容，适当调整给定的HTML模板，去除原有内容，并填充新内容。
-    backstory: 你是一位模板选择和填充专家，擅长根据文章内容调整HTML模板，去除原有内容，并填充新内容，保持整体风格不变。
-    allow_delegation: False
-    memory: True
-    max_rpm: 100
+  name: templater
+  role: 模板选择和填充专家
+  goal: 根据文章内容，适当调整给定的HTML模板，去除原有内容，并填充新内容。
+  backstory: 你是一位模板选择和填充专家，擅长根据文章内容调整HTML模板，去除原有内容，并填充新内容，保持整体风格不变。
+  allow_delegation: False
+  memory: True
+  max_rpm: 100
 
 publisher:
   role: 文章发布专家
