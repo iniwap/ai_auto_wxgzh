@@ -11,8 +11,9 @@ class AutowxGzh:
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
-    def __init__(self, use_template=False):
-        self.use_template = use_template
+    def __init__(self, use_template=False, need_auditor=False):
+        self.use_template = use_template  # 是否使用本地模板
+        self.need_auditor = need_auditor  # 是否开启质量审核，关闭降低token消耗
 
     @agent
     def researcher(self) -> Agent:
@@ -100,15 +101,23 @@ class AutowxGzh:
     def crew(self) -> Crew:
         """Creates the AutowxGzh crew"""
 
+        no_use_agent = []
+        no_use_task = []
         if self.use_template:
-            no_use_agent = "微信排版专家"
-            no_use_task = "design_content"
+            no_use_agent.append("微信排版专家")
+            no_use_task.append("design_content")
         else:
-            no_use_agent = "模板选择和填充专家"
-            no_use_task = "template_content"
+            no_use_agent.append("模板选择和填充专家")
+            no_use_task.append("template_content")
 
-        self.agents = [agent for agent in self.agents if agent.role != no_use_agent]
-        self.tasks = [task for task in self.tasks if task.name != no_use_task]
+        # 不开启质量审核
+        if not self.need_auditor:
+            no_use_agent.append("质量审核专家")
+            no_use_task.append("audit_content")
+
+        # 过滤不使用的
+        self.agents = [agent for agent in self.agents if agent.role not in no_use_agent]
+        self.tasks = [task for task in self.tasks if task.name not in no_use_task]
 
         return Crew(
             agents=self.agents,  # Automatically created by the @agent decorator
