@@ -19,10 +19,10 @@
 - wechat: 支持配置多个微信公众号
 - api：支持配置多个大模型平台，使用哪个修改`api_type`即可，只需改成你的api_key，其他不用变
     - model是列表，可以选用一个平台的多个模型中的一个，修改`model_index`即可
-    - openrouter的api_key也设计了多个，可以用来切换多个号（如果一个用完了）
+    - openrouter的api_key也设计了多个，可以用来切换多个号（每天有免费额度，用完切换账号即可，修改`key_index`）
 - img_api：生成图片模型，主要是用来做公众号封面图的
     - picsum: 由于生成图片消耗太大，这里提供一种随机图片方式，修改成这个`api_type`即可
-- use_template: 目前只有Claude 3.7有比较好的模板生成效果，由于无法直接使用（有API付费的当然），这里特别设计是否使用内置模板（每天可以免费到POE生成模板放到`knowledge/template`文件夹下）
+- use_template: 目前只有Claude 3.7有比较好的模板生成效果，由于无法直接使用（有API付费的当然），这里特别设计是否使用内置模板（每天可以免费到Poe生成模板放到`knowledge/template`文件夹下）
 - need_auditor: 为了降低token消耗，提高发布成功率，可关闭“质量审核”agent/task（默认关闭）
 
 ## 运行方式
