@@ -1,5 +1,6 @@
-# 💎微信公众号AI全自动发文
-基于CrewAI，自动获取各大平台热点，使用AI生成文章，发布到微信公众号。
+# CrewAI微信公众号自动发文
+
+基于 CrewAI 的微信公众号自动化工具，自动抓取知乎、微博等平台热点，生成高质量文章并发布到微信公众号。
 
 ## 🎯项目背景
 为了学习CrewAI，特开发了这个小项目。最后才发现公众号（未认证）限制巨多，有认证微信公众号的可以更好的发挥这个项目的作用。
@@ -25,15 +26,11 @@
 - use_template: 目前只有Claude 3.7有比较好的模板生成效果，由于无法直接使用（有API付费的当然），这里特别设计是否使用内置模板（每天可以免费到Poe生成模板放到`knowledge/template`文件夹下）
 - need_auditor: 为了降低token消耗，提高发布成功率，可关闭“质量审核”agent/task（默认关闭）
 
-## 🤵运行方式
-
-需要先安装所有依赖。
-
-```python
-pip install -r requirements.txt
-cd ai_auto_wxgzh
-python .\src\ai_auto_wxgzh\main.py
-```
+## 🚀 快速开始
+1. 克隆仓库：`git clone https://github.com/username/repo`
+2. 安装依赖：`pip install -r requirements.txt`
+3. 配置 `config.yaml`（设置 大模型API 密钥）
+4. 运行：`.\src\ai_auto_wxgzh\main.py`
 
 ## 🔍问题定位
 如果遇到没有发布成功或者没有生成final_article的情况，又找不到问题，请临时更换下CrewAI版本：
