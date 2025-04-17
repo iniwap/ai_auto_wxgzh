@@ -1,13 +1,14 @@
 # CrewAI微信公众号全自动生成文章并发布
 
 基于 CrewAI 的微信公众号自动化工具，自动抓取知乎、微博等平台热点，生成高质量、排版酷炫的文章并发布到微信公众号。
+![Python](https://img.shields.io/badge/Python-3.8+-blue) ![Stars](https://img.shields.io/github/stars/username/repo?label=收藏)
 
 ## 🎯项目背景
 为了学习CrewAI，特开发了这个小项目。最后才发现公众号（未认证）限制巨多，有认证微信公众号的可以更好的发挥这个项目的作用。
 
- 🤝 **欢迎交流，fork，来点star更好！**  🤝
+**喜欢项目？点个 Star 支持一下吧！🌟**
 
-## 🌟基本功能介绍
+## 💎基本功能介绍
 - 自动获取各大平台热门话题
 - 自动根据话题生成文章，CrewAI多个角色共同完成
 - 自动发图文消息到公众号
