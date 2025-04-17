@@ -56,6 +56,7 @@ pip  install crewai
 - **template1**: https://mp.weixin.qq.com/s/9MoMFXgY7ieEMW0kqBqfvQ
 - **template2**: https://mp.weixin.qq.com/s/0vCNvgbHfilSS77wKzM6Dg
 - **template3**: https://mp.weixin.qq.com/s/ygroULs7dx5Q54FkR8P0uA
+- **template4**: https://mp.weixin.qq.com/s/ntBrelxtNE155gRk6wHnZg
 - **template5**: https://mp.weixin.qq.com/s/pDPkktE_5KnkQkJ1x2-y9Q
 - **template6**: https://mp.weixin.qq.com/s/7F_Qdho-hzxeVV6NrsPmhQ
 - **template7**: https://mp.weixin.qq.com/s/ug7NseZDziDMWBVwe3s1pw
