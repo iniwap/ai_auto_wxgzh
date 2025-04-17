@@ -32,7 +32,7 @@
 1. 克隆仓库：`git clone https://github.com/iniwap/ai_auto_wxgzh.git`
 2. 安装依赖：`pip install -r requirements.txt`
 3. 配置 `config.yaml`（设置 微信公众号及大模型API KEY）
-4. 运行：`.\src\ai_auto_wxgzh\main.py`
+4. 运行：`python .\src\ai_auto_wxgzh\main.py`
 
 ## 🔍问题定位
 如果遇到没有发布成功或者没有生成final_article的情况，又找不到问题，请临时更换下CrewAI版本：
