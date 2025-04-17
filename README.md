@@ -1,17 +1,17 @@
-# 微信公众号自动发文
+# 💎微信公众号自动发文
 基于CrewAI，自动获取各大平台热点，使用AI生成文章，发布到微信公众号。
 
-## 项目背景
+## 🎯项目背景
 为了学习CrewAI，特开发了这个小项目。最后才发现公众号（未认证）限制巨多，有认证微信公众号的可以更好的发挥这个项目的作用。
 
  🤝 **欢迎交流，fork，来点star更好！**  🤝
 
-## 基本功能介绍
+## 🌟基本功能介绍
 - 自动获取各大平台热门话题
 - 自动根据话题生成文章，CrewAI多个角色共同完成
 - 自动发图文消息到公众号
 
-### 个性化功能
+### 🎁个性化功能
 
 为了更好的满足各种需求情况，通过配置文件（`config.yaml`）来完成
 
@@ -25,7 +25,7 @@
 - use_template: 目前只有Claude 3.7有比较好的模板生成效果，由于无法直接使用（有API付费的当然），这里特别设计是否使用内置模板（每天可以免费到Poe生成模板放到`knowledge/template`文件夹下）
 - need_auditor: 为了降低token消耗，提高发布成功率，可关闭“质量审核”agent/task（默认关闭）
 
-## 运行方式
+## 🤵运行方式
 
 需要先安装所有依赖。
 
@@ -35,7 +35,7 @@ cd ai_auto_wxgzh
 python .\src\ai_auto_wxgzh\main.py
 ```
 
-## 问题定位
+## 🔍问题定位
 如果遇到没有发布成功或者没有生成final_article的情况，又找不到问题，请临时更换下CrewAI版本：
 ```shell
 pip  uninstall crewai
@@ -51,7 +51,7 @@ pip  install crewai
 ⚠️⚠️⚠️ **注意：免费的openrouter有可能服务不正常，无法生成效果（这种情况只能等用的人少的时候，再试）；此外将config里的use_template改成false，可提高成功率。**
 这应该跟其最近修改了付费策略有关系，免费的终究是没那么好用。
 
-## 模板发布效果预览
+## 🔮模板发布效果预览
 经过反复的微调，已经完成发布到微信公众号的模板效果如下：
 - **template1**: https://mp.weixin.qq.com/s/9MoMFXgY7ieEMW0kqBqfvQ
 - **template2**: https://mp.weixin.qq.com/s/0vCNvgbHfilSS77wKzM6Dg
@@ -65,7 +65,7 @@ pip  install crewai
 
 :smile: **调整这些模板花费了大量时间，麻烦关注下公众号** 👆
  
-## 其他说明
+## 📌其他说明
 ~~由于不熟悉微信公众号开发，哪位知道如何正确的使用“position: absolute;”，麻烦提一个issue 或者PR给我。
 这个很必要，因为生成的模板都使用了，浏览器显示正常，但是发布到微信公众号，就变成了垂直排列，无法作为背景。整体效果差太多了。~~
 ### 经过分析，发现以下问题：
@@ -75,7 +75,7 @@ pip  install crewai
 - 不支持button，会被自动移除
 - 会自动移除 background: url
 
-## 后续计划
+## ❗后续计划
 - 优化模板，减少token消耗
 - 优化处理，减少不必要的token消耗
 - 增加功能，使输出效果更好
