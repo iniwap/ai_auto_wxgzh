@@ -75,6 +75,7 @@ pip  install crewai
 - 调整好的模板，效果虽然不能完全和原来的相比，但是总体还不错（有背景装饰、有动画）
 - 不支持button，会被自动移除
 - 会自动移除 background: url
+- <linearGradient id="catGradient">，此类动画，id会被自动移除，动画会失效
 
 ## 📢后续计划
 - 优化模板，减少token消耗
