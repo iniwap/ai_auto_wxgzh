@@ -25,7 +25,7 @@
     - openrouter的api_key也设计了多个，可以用来切换多个号（每天有免费额度，用完切换账号即可，修改`key_index`）
 - img_api：生成图片模型，主要是用来做公众号封面图的
     - picsum: 由于生成图片消耗太大，这里提供一种随机图片方式，修改成这个`api_type`即可
-- use_template: 目前只有Claude 3.7有比较好的模板生成效果，由于无法直接使用（有API付费的当然），这里特别设计是否使用内置模板（每天可以免费到Poe生成模板放到`knowledge/template`文件夹下）
+- use_template: 目前只有Claude 3.7有比较好的模板生成效果，由于无法直接使用（有API付费的可以，但消耗很高），这里特别设计是否使用内置模板（每天可以免费到Poe生成模板放到`knowledge/template`文件夹下）
 - need_auditor: 为了降低token消耗，提高发布成功率，可关闭“质量审核”agent/task（默认关闭）
 
 ## 🚀 快速开始
@@ -47,7 +47,7 @@ pip  install crewai==0.102.0
 pip  uninstall crewai
 pip  install crewai
 ```
-⚠️**免费的openrouter有可能服务不正常，无法生成效果（这种情况只能等用的人少的时候，再试）；此外将config里的use_template改成false，可提高成功率。**
+⚠️**免费的openrouter有可能服务不正常，无法正确运行（这种情况只能等用的人少的时候，再试）；此外将config里的use_template改成false，可提高成功率。**
 这应该跟其最近修改了付费策略有关系，免费的终究是没那么好用。
 
 ## 🔮模板发布效果预览
