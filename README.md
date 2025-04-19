@@ -63,7 +63,7 @@ pip  install crewai
 - **template9**: https://mp.weixin.qq.com/s/EVhL67x8w35IuNnoxI1IEA
 - **template10**: https://mp.weixin.qq.com/s/pDN5rgCgz0CbA8Q92CugYw
 
-*有兴趣的可以继续微调（如边距等），上面的模板可以比较好的显示在微信公众号上了。执行代码时，选择使用模板，生成的文章会自动选取填充上面的模板发布文章。*
+*有兴趣的可以继续微调（如边距等），上面的模板可以比较好的显示在微信公众号上了。执行代码时，自动随机选择模板，生成的文章会自动选取填充上面的模板发布文章。*
 
 :smile: **调整这些模板花费了大量时间，麻烦关注下公众号** 👆
 
